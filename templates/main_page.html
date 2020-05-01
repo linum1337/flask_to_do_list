@@ -2,70 +2,121 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Расписание</title>
+    <title>T E S T</title>
     <style type="text/css">
    TABLE {
     border-collapse: collapse; /* Убираем двойные линии между ячейками */
-    width: 300px; /* Ширина таблицы */
+    width: 100%; /* Ширина таблицы */
+
    }
    TH, TD {
     border: 1px solid black; /* Параметры рамки */
     text-align: center; /* Выравнивание по центру */
-    padding: 4px; /* Поля вокруг текста */
+    height: 50
+    #padding: 0px; /* Поля вокруг текста */
    }
-   TH {
-    height: 30px; /* Высота ячеек */
-    vertical-align: bottom; /* Выравнивание по нижнему краю */
-    padding: 0; /* Убираем поля вокруг текста */
+   textarea.text{
+    border: none; /* Убираем рамку */
+    background: transparent; /* Прозрачный фон */
+    margin: 3px; /* Отступы от линии */
+    width: 150px; /* Ширина поля */
+    padding: 0px 0 5px 5px; /* Поля в тексте */
+    height: 115px; /* Высота */
    }
-  </style>
+   table {
+font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+text-align: left;
+border-collapse: separate;
+border-spacing: 5px;
+background: #ECE9E0;
+color: #656665;
+border: 16px solid #ECE9E0;
+border-radius: 20px;
+}
+th {
+font-size: 18px;
+padding: 10px;
+}
+td {
+background: #F5D7BF;
+padding: 10px;
+}
+
+
+
+    </style>
 </head>
 <header>
     <p align="center">
     <div class="container">
+
         <table border="0">
-                <caption>Расписание</caption>
-                <tr>
-                    <th><a href="/monday">Пн</a></th>
-                    <th><a href="/tuesday">Вт</a></th>
-                    <th><a href="/wednesday">Ср</a></th>
-                    <th><a href="/thursday">Чт</a></th>
-                    <th><a href="/friday">Пт</a></th>
-                    <th><a href="/saturday">Сб</a></th>
-                    <th><a href="/sunday">Вс</a></th>
-                </tr>
-                <tr>
-                    <td><input></td>
-                    <td><input></td>
-                    <td><input></td>
-                    <td><input></td>
-                    <td><input></td>
-                    <td><input></td>
-                    <td><input></td>
-                </tr>
-                <tr>
-                    <td>
-                        <button>создать</button>
-                    </td>
-                    <td>
-                        <button>создать</button>
-                    </td>
-                    <td>
-                        <button>создать</button>
-                    </td>
-                    <td>
-                        <button>создать</button>
-                    </td>
-                    <td>
-                        <button>создать</button>
-                    </td>
-                    <td>
-                        <button>создать</button>
-                    </td>
-                    <td>
-                        <button>создать</button>
-                    </td>
-                </tr>
+            <caption><input placeholder="название месяца"></caption>
+            <tr>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+            </tr>
+            <tr>
+                <td><textarea type="text" class="text" name=""/></textarea></td>
+                <th><textarea type="text" class="text" name=""/></textarea></th>
+                <th><textarea type="text" class="text" name=""/></textarea></th>
+                <th><textarea type="text" class="text" name=""/></textarea></th>
+                <th><textarea type="text" class="text" name=""/></textarea></th>
+                <th><textarea type="text" class="text" name=""/></textarea></th>
+                <th><textarea type="text" class="text" name=""/></textarea></th>
+            </tr>
+            <tr>
+                <th>8</th>
+                <th>9</th>
+                <th>10</th>
+                <th>11</th>
+                <th>12</th>
+                <th>13</th>
+                <th>14</th>
+            </tr>
+            <tr>
+                <td><textarea type="text" class="text" name=""/></textarea></td>
+                <th><textarea type="text" class="text" name=""/></textarea></th>
+                <th><textarea type="text" class="text" name=""/></textarea></th>
+                <th><textarea type="text" class="text" name=""/></textarea></th>
+                <th><textarea type="text" class="text" name=""/></textarea></th>
+                <th><textarea type="text" class="text" name=""/></textarea></th>
+                <th><textarea type="text" class="text" name=""/></textarea></th>
+            </tr>
+            <tr>
+                <th>15</th>
+                <th>16</th>
+                <th>17</th>
+                <th>18</th>
+                <th>19</th>
+                <th>20</th>
+                <th>21</th>
+            </tr>
+            <tr>
+                <td><textarea type="text" class="text" name=""/></textarea></td>
+                <th><textarea type="text" class="text" name=""/></textarea></th>
+                <th><textarea type="text" class="text" name=""/></textarea></th>
+                <th><textarea type="text" class="text" name=""/></textarea></th>
+                <th><textarea type="text" class="text" name=""/></textarea></th>
+                <th><textarea type="text" class="text" name=""/></textarea></th>
+                <th><textarea type="text" class="text" name=""/></textarea></th>
+            </tr>
+            <tr>
+                <th>29</th>
+                <th>30</th>
+                <th>31</th>
+            </tr>
+            <tr>
+                <td><textarea type="text" class="text" name=""/></textarea></td>
+                <th><textarea type="text" class="text" name=""/></textarea></th>
+                <th><textarea type="text" class="text" name=""/></textarea></th>
+            </tr>
+
         </table>
         </body>
     </div>
