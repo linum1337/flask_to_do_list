@@ -1,9 +1,13 @@
-from flask import Flask, redirect , render_template
-from loginform import LoginForm
+from flask import Flask, redirect, render_template
+from ClassLoginForm import LoginForm
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+
+@app.route('/list')
+def list():
+    return render_template('main_page.html', title='To_do')
 
 
 @app.route('/')
@@ -11,7 +15,7 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        return redirect('/success')
+        return redirect('/list')
     return render_template('login.html', title='Авторизация', form=form)
 
 
