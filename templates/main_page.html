@@ -7,7 +7,14 @@
    TABLE {
     border-collapse: collapse; /* Убираем двойные линии между ячейками */
     width: 100%; /* Ширина таблицы */
-
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    text-align: left;
+    border-collapse: separate;
+    border-spacing: 5px;
+    background: #ECE9E0;
+    color: #656665;
+    border: 16px solid #ECE9E0;
+    border-radius: 20px;
    }
    TH, TD {
     border: 1px solid black; /* Параметры рамки */
@@ -41,6 +48,11 @@ td {
 background: #F5D7BF;
 padding: 10px;
 }
+input[type='text']{
+    border: none;
+    background: #ECE9E0;
+    background: #ECE9E0;
+}
 
 
 
@@ -51,15 +63,15 @@ padding: 10px;
     <div class="container">
 
         <table border="0">
-            <caption><input placeholder="название месяца"></caption>
+            <caption><input placeholder="название месяца" type="text"></caption>
             <tr>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-                <th>7</th>
+                <th><input placeholder="название дня" type="text"></th>
+                <th><input placeholder="название дня" type="text"></th>
+                <th><input placeholder="название дня" type="text"></th>
+                <th><input placeholder="название дня" type="text"></th>
+                <th><input placeholder="название дня" type="text"></th>
+                <th><input placeholder="название дня" type="text"></th>
+                <th><<input placeholder="название дня" type="text"></th>
             </tr>
             <tr>
                 <td><textarea type="text" class="text" name=""/></textarea></td>
@@ -71,13 +83,13 @@ padding: 10px;
                 <th><textarea type="text" class="text" name=""/></textarea></th>
             </tr>
             <tr>
-                <th>8</th>
-                <th>9</th>
-                <th>10</th>
-                <th>11</th>
-                <th>12</th>
-                <th>13</th>
-                <th>14</th>
+                <th><input placeholder="название дня" type="text"></th>
+                <th><input placeholder="название дня" type="text"></th>
+                <th><input placeholder="название дня" type="text"></th>
+                <th><input placeholder="название дня" type="text"></th>
+                <th><input placeholder="название дня" type="text"></th>
+                <th><input placeholder="название дня" type="text"></th>
+                <th><input placeholder="название дня" type="text"></th>
             </tr>
             <tr>
                 <td><textarea type="text" class="text" name=""/></textarea></td>
@@ -89,13 +101,13 @@ padding: 10px;
                 <th><textarea type="text" class="text" name=""/></textarea></th>
             </tr>
             <tr>
-                <th>15</th>
-                <th>16</th>
-                <th>17</th>
-                <th>18</th>
-                <th>19</th>
-                <th>20</th>
-                <th>21</th>
+                <th><input placeholder="название дня" type="text"></th>
+                <th><input placeholder="название дня" type="text"></th>
+                <th><input placeholder="название дня" type="text"></th>
+                <th><input placeholder="название дня" type="text"></th>
+                <th><input placeholder="название дня" type="text"></th>
+                <th><input placeholder="название дня" type="text"></th>
+                <th><input placeholder="название дня" type="text"></th>
             </tr>
             <tr>
                 <td><textarea type="text" class="text" name=""/></textarea></td>
@@ -107,9 +119,9 @@ padding: 10px;
                 <th><textarea type="text" class="text" name=""/></textarea></th>
             </tr>
             <tr>
-                <th>29</th>
-                <th>30</th>
-                <th>31</th>
+                <th><input placeholder="название дня" type="text"></th>
+                <th><input placeholder="название дня" type="text"></th>
+                <th><input placeholder="название дня" type="text"></th>
             </tr>
             <tr>
                 <td><textarea type="text" class="text" name=""/></textarea></td>
