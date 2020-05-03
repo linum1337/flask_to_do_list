@@ -1,1 +1,8 @@
 flask
+Flask-WTF
+Jinja2
+WTForms
+MarkuoSafe
+Werkzeug
+itsdangerous
+MarkupSafe
