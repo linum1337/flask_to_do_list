@@ -9,6 +9,11 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 def list():
     return render_template('main_page.html', title='To_do')
 
+@app.route('/month_change')
+def change():
+    return render_template('month_change.html', title='To_do')
+
+
 
 @app.route('/')
 @app.route('/login', methods=['POST', 'GET'])
