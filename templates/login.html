@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,30 +15,23 @@
         <a class="navbar-brand" href="#">Ежедневник</a>
     </nav>
 </header>
-<main role="main" class="container">
+<main class="container">
+    <form action="http://127.0.0.1:8080/registration" method="GET" novalidate>
+        {{ form.csrf_token }}
+        <p align="right">{{ form.submitR(type="submit", class="btn btn-link") }}</p>
+    </form>
 <h1>Авторизация</h1>
 <form action="" method="post" novalidate>
+    {{ form.csrf_token }}
     {{ form.hidden_tag() }}
     <p>
         {{ form.username.label }}<br>
         {{ form.username(class="form-control") }}<br>
-        {% for error in form.username.errors %}
-    <div class="alert alert-danger" role="alert">
-        {{ error }}
-    </div>
-    {% endfor %}
-    </p>
     <p>
         {{ form.password.label }}<br>
         {{ form.password(class="form-control", type="password") }}<br>
-        {% for error in form.password.errors %}
-    <div class="alert alert-danger" role="alert">
-        {{ error }}
-    </div>
-    {% endfor %}
-    </p>
-    <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+        {% block content %}{% endblock %}
+    <p>{{ form.submitL(type="submit", class="btn btn-primary") }}</p>
 </form>
     </main>
 </body>
