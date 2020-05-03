@@ -2,7 +2,7 @@ flask
 Flask-WTF
 Jinja2
 WTForms
-MarkuoSafe
+MarkupSafe
 Werkzeug
 itsdangerous
 MarkupSafe
