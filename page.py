@@ -10,6 +10,10 @@ app = Flask(__name__)
 salt = os.urandom(32)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
+@app.route('/month_change')
+def month_change():
+    return render_template('month_change.html', title='Выбор месяца')
+
 
 @app.route('/registration', methods=['GET'])
 def registration():
@@ -63,7 +67,7 @@ def check_log():
     session = db_session.create_session()
     key = hashlib.pbkdf2_hmac('sha256' , form.password.data.encode('utf-8') , salt , 100000 , dklen=128)
     if session.query(User).filter(User.name == form.username.data, User.hashed_password == key).first() :
-        return redirect('/list')
+        return redirect('/month_change')
     else:
         return render_template('error_log.html', title='Авторизация' , form=form)
 

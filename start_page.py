@@ -37,7 +37,7 @@ def registration():
                         u.hashed_password = form.password.data
                         session.add(u)
                         session.commit()
-                        return redirect('/login')
+                        return redirect('/month_change')
                     else :
                         return render_template('error_reg.html' , title='Регистрация' , form=form)
                 else :
