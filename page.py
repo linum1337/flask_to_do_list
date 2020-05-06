@@ -1,11 +1,11 @@
 from flask import Flask, redirect, render_template
-from AuthForm import LoginForm
-from RegForm import RegForm
 from data.users import User
 from data import db_session
+from flask_ngrok import run_with_ngrok
 import os, hashlib
 
 app = Flask(__name__)
+run_with_ngrok(app)
 salt = os.urandom(32)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
@@ -102,4 +102,4 @@ def list():
 
 if __name__ == '__main__':
     db_session.global_init("db/users.sqlite")
-    app.run(port=8080, host='127.0.0.1')
+    app.run()
