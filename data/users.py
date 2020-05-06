@@ -9,4 +9,3 @@ class User(SqlAlchemyBase):
                            primary_key=True, autoincrement=True)
     name = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    salt = sqlalchemy.Column(sqlalchemy.String, nullable=True)
