@@ -1,13 +1,13 @@
 from flask import Flask, redirect, render_template
 from AuthForm import LoginForm
 from RegForm import RegForm
+from TableForm import TableForm
 from data.users import User
 from data import db_session
-import os, hashlib
+from data.Days import DaysInfo
 
 
 app = Flask(__name__)
-salt = os.urandom(32)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
@@ -38,15 +38,22 @@ def check_reg():
                     if str(i) in password :
                         digit_in = True
                 if digit_in :
-                    key = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100000, dklen=128)
-                    if not session.query(User).filter(User.name == form.username.data,
-                                                      User.hashed_password == key).first():
-                        u = User()
-                        u.name = form.username.data
-                        u.hashed_password = key
-                        session.add(u)
-                        session.commit()
-                    return redirect('/login')
+                    if not session.query(User).filter(User.name == form.username.data).first() :
+                        if not session.query(User).filter(User.name == form.username.data,
+                                                          User.hashed_password == password).first():
+                                u = User()
+                                u.name = form.username.data
+                                u.hashed_password = password
+                                session.add(u)
+                                session.commit()
+                                for i in range(31):
+                                    d = DaysInfo()
+                                    session.add(d)
+                                session.commit()
+
+                        return redirect('/login')
+                    else:
+                        return render_template('same_error.html' , title='Регистрация' , form=form)
                 else :
                     return render_template('error_reg.html' , title='Регистрация' , form=form)
             else :
@@ -61,8 +68,7 @@ def check_reg():
 def check_log():
     form = LoginForm()
     session = db_session.create_session()
-    key = hashlib.pbkdf2_hmac('sha256' , form.password.data.encode('utf-8') , salt , 100000 , dklen=128)
-    if session.query(User).filter(User.name == form.username.data, User.hashed_password == key).first() :
+    if session.query(User).filter(User.name == form.username.data, User.hashed_password == form.password.data).first():
         return redirect('/list')
     else:
         return render_template('error_log.html', title='Авторизация' , form=form)
@@ -70,9 +76,11 @@ def check_log():
 
 @app.route('/list')
 def list():
-    return render_template('main_page.html', title='To_do')
+    form = TableForm()
+    return render_template('main_page.html', title='To_do', form=form)
 
 
 if __name__ == '__main__':
     db_session.global_init("db/users.sqlite")
+    db_session.global_init("db/days.sqlite")
     app.run(port=8080, host='127.0.0.1')
