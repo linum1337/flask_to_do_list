@@ -2,9 +2,10 @@ from flask import Flask, redirect, render_template
 from AuthForm import LoginForm
 from RegForm import RegForm
 from TableForm import TableForm
-from data.users import User
 from data import db_session
+from data.users import User
 from data.Days import DaysInfo
+import datetime
 
 
 app = Flask(__name__)
@@ -26,8 +27,8 @@ def login():
 
 @app.route('/check_reg', methods=['POST'])
 def check_reg():
-    form = RegForm()
     session = db_session.create_session()
+    form = RegForm()
     password = form.password.data
     password_again = form.password_again.data
     if password == password_again :
@@ -79,24 +80,25 @@ def check_log():
 def save_info():
     session = db_session.create_session()
     form = TableForm()
-    if session.query(DaysInfo).filter(DaysInfo.id == User.id).first():
-        print(form.dn1.data)
+    if form.validate_on_submit():
+        days_info_texts = session.query(DaysInfo).filter(DaysInfo.key_id == 1).all()
+        for i in range(len(form.list_days)):
+            days_info_texts[i].text = form.list_days[i].data
         session.commit()
-        for j in form.list_days_names:
-            print(j)
-            DaysInfo.name_day = j
-            session.commit()
-    return render_template('main_page.html', title='To_do', form=form)
+    return redirect('/list')
 
 
 @app.route('/list', methods=['GET'])
 def list():
     form = TableForm()
     session = db_session.create_session()
+    days_info_texts = session.query(DaysInfo).filter(DaysInfo.key_id == 1).all()
+    for i in range(30):
+        form.list_days[i].data = days_info_texts[i].text
     return render_template('main_page.html', title='To_do', form=form)
 
 
 if __name__ == '__main__':
     db_session.global_init("db/users.sqlite")
     db_session.global_init("db/days.sqlite")
-    app.run(port=8080, host='127.0.0.1')
+    app.run(port=8080, host='127.0.0.1', debug=True)
