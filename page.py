@@ -74,7 +74,12 @@ def check_log():
         return render_template('error_log.html', title='Авторизация' , form=form)
 
 
-@app.route('/list')
+@app.route('/save_info', methods=['POST'])
+def save_info():
+    pass
+
+
+@app.route('/list', methods=['GET'])
 def list():
     form = TableForm()
     return render_template('main_page.html', title='To_do', form=form)
