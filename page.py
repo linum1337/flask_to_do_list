@@ -48,6 +48,7 @@ def check_reg():
                                 session.commit()
                                 for i in range(31):
                                     d = DaysInfo()
+                                    d.key_id = u.id
                                     session.add(d)
                                 session.commit()
 
@@ -76,12 +77,22 @@ def check_log():
 
 @app.route('/save_info', methods=['POST'])
 def save_info():
-    pass
+    session = db_session.create_session()
+    form = TableForm()
+    if session.query(DaysInfo).filter(DaysInfo.id == User.id).first():
+        print(form.dn1.data)
+        session.commit()
+        for j in form.list_days_names:
+            print(j)
+            DaysInfo.name_day = j
+            session.commit()
+    return render_template('main_page.html', title='To_do', form=form)
 
 
 @app.route('/list', methods=['GET'])
 def list():
     form = TableForm()
+    session = db_session.create_session()
     return render_template('main_page.html', title='To_do', form=form)
 
 
