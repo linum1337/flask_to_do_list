@@ -11,4 +11,5 @@ class DaysInfo(SqlAlchemyBase):
     name_day = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     text = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     important = sqlalchemy.Column(sqlalchemy.Boolean, nullable=True)
+    key_id = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
 
