@@ -53,13 +53,13 @@
             <!--<input class="form-control mr-sm-2" type="search" placeholder="Название месяца" aria-label="Search">-->
             <p>{{ form.submit_save(type="submit", class="btn btn-primary", align="right") }}</p>
             <tr>
-                <th><input placeholder="название дня" type="text"></th>
-                <th><input placeholder="название дня" type="text"></th>
-                <th><input placeholder="название дня" type="text"></th>
-                <th><input placeholder="название дня" type="text"></th>
-                <th><input placeholder="название дня" type="text"></th>
-                <th><input placeholder="название дня" type="text"></th>
-                <th><input placeholder="название дня" type="text"></th>
+                <th>{{ form.list_dates[0](class="form-control") }}</th>
+                <th>{{ form.list_dates[1](class="form-control") }}</th>
+                <th>{{ form.list_dates[2](class="form-control") }}</th>
+                <th>{{ form.list_dates[3](class="form-control") }}</th>
+                <th>{{ form.list_dates[4](class="form-control") }}</th>
+                <th>{{ form.list_dates[5](class="form-control") }}</th>
+                <th>{{ form.list_dates[6](class="form-control") }}</th>
             </tr>
             <tr>
                 <td align=center bgcolor=#32383e ondblclick="this.style.background='#007bff'"
