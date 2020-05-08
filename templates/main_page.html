@@ -50,7 +50,6 @@
 
             {{ form.csrf_token }}
             {{ form.hidden_tag() }}
-            <!--<input class="form-control mr-sm-2" type="search" placeholder="Название месяца" aria-label="Search">-->
             <p>{{ form.submit_save(type="submit", class="btn btn-primary", align="right") }}</p>
             <tr>
                 <th>{{ form.list_dates[0].data[0] }}<br>
