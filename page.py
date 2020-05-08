@@ -52,7 +52,7 @@ def check_reg():
                                 session.commit()
                                 for i in range(35):
                                     d = DaysInfo()
-                                    d.data = today + datetime.timedelta(days=i)
+                                    d.data = (today + datetime.timedelta(days=i)).strftime("%d/%m/%y")
                                     d.user_name = u.name
                                     session.add(d)
                                 session.commit()
@@ -89,23 +89,26 @@ def save_info():
     form = TableForm()
     if form.validate_on_submit():
         if session.query(DaysInfo).filter(user_name == DaysInfo.user_name).all():
-            days_info_texts = session.query(DaysInfo).filter(user_name == DaysInfo.user_name).all()
+            days_info = session.query(DaysInfo).filter(user_name == DaysInfo.user_name).all()
             for i in range(len(form.list_days)):
-                print(days_info_texts[i].text)
-                days_info_texts[i].text = form.list_days[i].data
+                days_info[i].text = form.list_days[i].data
             session.commit()
     return redirect('/list')
 
 
 @app.route('/list', methods=['GET'])
 def list():
+    list_weekdays = {"Mon" : 'Понедельник' , "Tue" : 'Вторник' , "Wed" : 'Среда' , "Thu" : 'Четверг' ,
+                     "Fri" : 'Пятница' , "Sat" : 'Суббота' , "Sun" : 'Воскресенье'}
     global user_name
     form = TableForm()
     session = db_session.create_session()
-    days_info_texts = session.query(DaysInfo).filter(DaysInfo.user_name == user_name).all()
+    days_info = session.query(DaysInfo).filter(DaysInfo.user_name == user_name).all()
     for i in range(35):
-        form.list_days[i].data = days_info_texts[i].text
-        form.list_dates[i].data = days_info_texts[i].data
+        form.list_days[i].data = days_info[i].text
+        data = list_weekdays[calendar.day_abbr[datetime.datetime.strptime(days_info[i].data,
+                                                                          "%d/%m/%y").date().weekday()]]
+        form.list_dates[i].data = [days_info[i].data, data]
     return render_template('main_page.html', title='To_do', form=form)
 
 
