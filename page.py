@@ -79,9 +79,18 @@ def check_log():
     if session.query(User).filter(User.name == form.username.data, User.hashed_password == form.password.data).first():
         today = datetime.datetime.today()
         days_info = session.query(DaysInfo).filter(user_name == DaysInfo.user_name).all()
+        old_dates_dict = {}
+        old_dates_list = []
         if days_info[0].data != today.date() :
             for i in range(35):
-                days_info[i].data = (today + datetime.timedelta(days=i)).strftime("%d/%m/%y")
+                if days_info[i].data != (today + datetime.timedelta(days=i)).strftime("%d/%m/%y"):
+                    old_dates_dict[days_info[i].data] = days_info[i].text
+                    old_dates_list.append(days_info[i].data)
+                    days_info[i].data = (today + datetime.timedelta(days=i)).strftime("%d/%m/%y")
+            for i in old_dates_list:
+                for j in range(35):
+                    if days_info[i].data == i:
+                        days_info[i].text = old_dates_dict[i]
         return redirect('/list')
     else:
         return render_template('error_log.html', title='Авторизация' , form=form)
