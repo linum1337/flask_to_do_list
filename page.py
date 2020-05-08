@@ -5,10 +5,12 @@ from TableForm import TableForm
 from data import db_session
 from data.users import User
 from data.Days import DaysInfo
+from flask_ngrok import run_with_ngrok
 import datetime
 
 
 app = Flask(__name__)
+run_with_ngrok(app)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
@@ -81,7 +83,7 @@ def save_info():
     session = db_session.create_session()
     form = TableForm()
     if form.validate_on_submit():
-        days_info_texts = session.query(DaysInfo).filter(DaysInfo.key_id == 1).all()
+        days_info_texts = session.query(DaysInfo).filter(DaysInfo.key_id == User.id).all()
         for i in range(len(form.list_days)):
             days_info_texts[i].text = form.list_days[i].data
         session.commit()
@@ -101,4 +103,4 @@ def list():
 if __name__ == '__main__':
     db_session.global_init("db/users.sqlite")
     db_session.global_init("db/days.sqlite")
-    app.run(port=8080, host='127.0.0.1', debug=True)
+    app.run()
