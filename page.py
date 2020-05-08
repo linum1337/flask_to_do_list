@@ -86,6 +86,7 @@ def check_log():
                 if days_info[i].data != (today + datetime.timedelta(days=i)).strftime("%d/%m/%y"):
                     old_dates_dict[days_info[i].data] = days_info[i].text
                     old_dates_list.append(days_info[i].data)
+                    days_info[i].text = ''
                     days_info[i].data = (today + datetime.timedelta(days=i)).strftime("%d/%m/%y")
             for i in old_dates_list:
                 for j in range(35):
