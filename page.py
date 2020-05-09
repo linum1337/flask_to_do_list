@@ -90,8 +90,9 @@ def check_log():
                     days_info[i].data = (today + datetime.timedelta(days=i)).strftime("%d/%m/%y")
             for i in old_dates_list:
                 for j in range(35):
-                    if days_info[i].data == i:
-                        days_info[i].text = old_dates_dict[i]
+                    if days_info[j].data == i:
+                        days_info[j].text = old_dates_dict[i]
+            session.commit()
         return redirect('/list')
     else:
         return render_template('error_log.html', title='Авторизация' , form=form)
