@@ -5,12 +5,15 @@ from TableForm import TableForm
 from data import db_session
 from data.users import User
 from data.Days import DaysInfo
+from flask_ngrok import run_with_ngrok
 import datetime
 import calendar
 
 
 app = Flask(__name__)
+run_with_ngrok(app)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+
 user_name = ''
 
 
@@ -131,4 +134,4 @@ def list():
 if __name__ == '__main__':
     db_session.global_init("db/users.sqlite")
     db_session.global_init("db/days.sqlite")
-    app.run(port=8080 , host='127.0.0.1', debug=True)
+    app.run()
