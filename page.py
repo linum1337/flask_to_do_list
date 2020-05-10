@@ -4,17 +4,15 @@ from RegForm import RegForm
 from TableForm import TableForm
 from data import db_session
 from data.users import User
-from data.Days import DaysInfo
-from flask_ngrok import run_with_ngrok
+from data.users import DaysInfo
 import datetime
 import calendar
 
 
 app = Flask(__name__)
-run_with_ngrok(app)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
-
 user_name = ''
+
 
 
 @app.route('/registration', methods=['GET'])
@@ -81,15 +79,15 @@ def check_log():
     session = db_session.create_session()
     if session.query(User).filter(User.name == form.username.data, User.hashed_password == form.password.data).first():
         today = datetime.datetime.today()
-        days_info = session.query(DaysInfo).filter(user_name == DaysInfo.user_name).all()
+        days_info = session.query(DaysInfo).filter(DaysInfo.user_name == user_name).all()
         old_dates_dict = {}
         old_dates_list = []
-        if days_info[0].data != today.date() :
+        if days_info[0].data != today.date():
             for i in range(35):
                 if days_info[i].data != (today + datetime.timedelta(days=i)).strftime("%d/%m/%y"):
                     old_dates_dict[days_info[i].data] = days_info[i].text
                     old_dates_list.append(days_info[i].data)
-                    days_info[i].text = ''
+                    days_info[i].text = None
                     days_info[i].data = (today + datetime.timedelta(days=i)).strftime("%d/%m/%y")
             for i in old_dates_list:
                 for j in range(35):
@@ -107,8 +105,8 @@ def save_info():
     session = db_session.create_session()
     form = TableForm()
     if form.validate_on_submit():
-        if session.query(DaysInfo).filter(user_name == DaysInfo.user_name).all():
-            days_info = session.query(DaysInfo).filter(user_name == DaysInfo.user_name).all()
+        if session.query(DaysInfo).join(User).filter(DaysInfo.user_name == user_name).all():
+            days_info = session.query(DaysInfo).join(User).filter(DaysInfo.user_name == user_name).all()
             for i in range(len(form.list_days)):
                 days_info[i].text = form.list_days[i].data
             session.commit()
@@ -119,7 +117,6 @@ def save_info():
 def list():
     list_weekdays = {"Mon" : 'Понедельник' , "Tue" : 'Вторник' , "Wed" : 'Среда' , "Thu" : 'Четверг' ,
                      "Fri" : 'Пятница' , "Sat" : 'Суббота' , "Sun" : 'Воскресенье'}
-    global user_name
     form = TableForm()
     session = db_session.create_session()
     days_info = session.query(DaysInfo).filter(DaysInfo.user_name == user_name).all()
@@ -134,4 +131,4 @@ def list():
 if __name__ == '__main__':
     db_session.global_init("db/users.sqlite")
     db_session.global_init("db/days.sqlite")
-    app.run()
+    app.run(port=8080, host='127.0.0.1', debug=True)
